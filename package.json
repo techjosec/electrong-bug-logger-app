@@ -1,8 +1,8 @@
 {
-  "name": "simple-electron-react",
-  "productName": "React Electron App",
+  "name": "bug-logger-app",
+  "productName": "BugLogger",
   "version": "1.0.0",
-  "description": "Simple boilerplate for building Electron apps with React",
+  "description": "A bug-logger app for loggings bugs to fix",
   "license": "MIT",
   "engines": {
     "node": ">=9.0.0",
@@ -35,6 +35,7 @@
     "electron": "^9.0.0",
     "electron-devtools-installer": "^3.0.0",
     "electron-packager": "^14.2.1",
+    "eslint": "^7.2.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
