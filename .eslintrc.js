@@ -19,7 +19,8 @@ module.exports = {
 		`react`,
 	],
 	rules: {
-		"react/jsx-filename-extension" : [1, { extensions: [`.js`, `.jsx`] }],
+        "react/jsx-filename-extension" : [1, { extensions: [`.js`, `.jsx`] }],
+        "react/jsx-indent"             : [ 'off' ],
 		'consistent-return'            : `error`,
 		'brace-style'                  : [`error`, `allman`],
 		'space-in-parens'              : [`error`, `always`],
@@ -33,6 +34,7 @@ module.exports = {
 				afterColon  : true,
 				on          : `colon`,
 			},
-		}],
+        }],
+        'no-unused-vars': ["error", { "argsIgnorePattern": "^_" }]
 	},
 };
