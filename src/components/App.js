@@ -1,10 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Container, Table } from 'react-bootstrap';
+import LogItem from './LogItem';
 
-const App = () => (
-	<div className="app">
-		<h1>React Electron Boilerplate</h1>
-		<p>This is a simple boilerplate for using React with Electron</p>
-	</div>
-);
+const actualDate = new Date();
+const initialLogs = [
+	{
+		_id: 1, text: `This is long one`, priority: `low`, user: `Mabel`, created: actualDate,
+	},
+	{
+		_id: 2, text: `This is long two`, priority: `moderate`, user: `Ariel`, created: actualDate,
+	},
+	{
+		_id: 3, text: `This is long three`, priority: `high`, user: `Jodias`, created: actualDate,
+	},
+	{
+		_id: 4, text: `This is long four`, priority: `moderate`, user: `Lalour`, created: actualDate,
+	},
+];
+
+const App = () =>
+{
+	const [logs, setLogs] = useState( initialLogs );
+
+	return (
+
+		<Container>
+
+			<Table>
+
+				<thead>
+
+					<tr>
+						<th>Priority</th>
+						<th>Text</th>
+						<th>User</th>
+						<th>Created</th>
+						<th> </th>
+					</tr>
+
+				</thead>
+
+				<tbody>
+
+					{
+						logs.map( ( log ) => ( <LogItem key={log._id} log={log} /> ) )
+					}
+
+				</tbody>
+
+			</Table>
+
+		</Container>
+
+	);
+};
 
 export default App;
