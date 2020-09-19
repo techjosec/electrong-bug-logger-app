@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 
 import { Button, Badge } from 'react-bootstrap';
 
-const setVariantOfProirity = ( priority ) =>
+const setVariantOfPriority = ( priority ) =>
 {
 	switch ( priority )
 	{
@@ -30,7 +30,7 @@ const LogItem = ( {
 	<tr>
 
 		<td>
-			<Badge variant={setVariantOfProirity( priority )} className="p-2">
+			<Badge variant={setVariantOfPriority( priority )} className="p-2">
 
 				{ /** Capitalized first char for the text */ }
 				{ `${priority.charAt( 0 ).toUpperCase()}${priority.slice( 1 )}` }
