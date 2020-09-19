@@ -19,6 +19,8 @@ module.exports = {
 		`react`,
 	],
 	rules: {
+        "no-underscore-dangle"         : [ `off` ],
+        "react/forbid-prop-types"      : [ `off` ],
         "react/jsx-filename-extension" : [1, { extensions: [`.js`, `.jsx`] }],
         "react/jsx-indent"             : [ 'off' ],
 		'consistent-return'            : `error`,
