@@ -19,6 +19,7 @@ const setVariantOfPriority = ( priority ) =>
 };
 
 const LogItem = ( {
+	deleteLogItem,
 	log: {
 		priority,
 		text,
@@ -45,14 +46,15 @@ const LogItem = ( {
 			</Moment>
 		</td>
 		<td>
-			<Button title="remove" variant="danger" size="sm">x</Button>
+			<Button title="remove" variant="danger" size="sm" onClick={() => deleteLogItem( _id )}>x</Button>
 		</td>
 
 	</tr>
 );
 
 LogItem.propTypes = {
-	log: PropTypes.object.isRequired,
+	log           : PropTypes.object.isRequired,
+	deleteLogItem : PropTypes.func.isRequired,
 };
 
 export default LogItem;

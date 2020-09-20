@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Table, Alert } from 'react-bootstrap';
+import swal from 'sweetalert';
+
 import LogItem from './LogItem';
 import AddLogItem from './AddLogItem';
 
@@ -44,6 +46,30 @@ const App = () =>
 		}, seconds * 1000 );
 	};
 
+	const confirmLogItemDelete = ( _id ) =>
+	{
+		swal( {
+			title      : `Are you sure?`,
+			text       : `You are deleting a log item`,
+			icon       : `warning`,
+			buttons    : true,
+			dangerMode : true,
+		} )
+			.then( ( willDelete ) =>
+			{
+				if ( willDelete )
+				{
+					setLogs( logs.filter( ( log ) => log._id !== _id ) );
+					showAlert( `Log item removed` );
+				}
+			} );
+	};
+
+	const deleteLogItem = ( _id ) =>
+	{
+		confirmLogItemDelete( _id );
+	};
+
 	const addLogItem = ( item ) =>
 	{
 		const newItem = {
@@ -79,7 +105,9 @@ const App = () =>
 				<tbody>
 
 					{
-						logs.map( ( log ) => ( <LogItem key={log._id} log={log} /> ) )
+						logs.map( ( log ) => (
+							<LogItem key={log._id} deleteLogItem={deleteLogItem} log={log} />
+						) )
 					}
 
 				</tbody>
