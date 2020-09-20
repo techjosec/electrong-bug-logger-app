@@ -22,13 +22,14 @@ const AddLogItem = ( { addLogItem } ) =>
 
 		<Card className="mt-5 mb-3">
 			<Card.Body>
+				<Card.Title className="text-center">Add new Log</Card.Title>
 				<Form onSubmit={onSubmit}>
 
 					<Row className="my-3">
 
 						<Col>
 
-							<Form.Control placeholder="Log" value={text} onChange={( e ) => setText( e.target.value )} />
+							<Form.Control placeholder="Log" value={text} onChange={( e ) => setText( e.target.value )} required />
 
 						</Col>
 
@@ -38,13 +39,13 @@ const AddLogItem = ( { addLogItem } ) =>
 
 						<Col>
 
-							<Form.Control placeholder="User" value={user} onChange={( e ) => setUser( e.target.value )} />
+							<Form.Control placeholder="User" value={user} onChange={( e ) => setUser( e.target.value )} required />
 
 						</Col>
 
 						<Col>
 
-							<Form.Control as="select" value={priority} onChange={( e ) => setPriority( e.target.value )}>
+							<Form.Control as="select" value={priority} onChange={( e ) => setPriority( e.target.value )} required>
 
 								<option value="0">Select Priority</option>
 								<option value="low">Low</option>
