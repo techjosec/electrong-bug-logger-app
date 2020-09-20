@@ -55,7 +55,7 @@ const App = () =>
 			{
 				if ( willDelete )
 				{
-					setLogs( logs.filter( ( log ) => log._id !== _id ) );
+					ipcRenderer.send( `logs:delete`, _id );
 					showAlert( `Log item removed` );
 				}
 			} );
@@ -68,13 +68,7 @@ const App = () =>
 
 	const addLogItem = ( item ) =>
 	{
-		const newItem = {
-			...item,
-			_id     : Math.floor( Math.random() * 90000 ) + 10000,
-			created : new Date(),
-		};
-		setLogs( [...logs, newItem] );
-
+		ipcRenderer.send( `logs:add`, item );
 		showAlert( `Log added` );
 	};
 

@@ -80,6 +80,7 @@ function createMainWindow()
 
 app.on( `ready`, createMainWindow );
 
+/** Sends all logs items to mainWindow */
 const sendLogs = async () =>
 {
 	try
@@ -93,8 +94,30 @@ const sendLogs = async () =>
 		process.exit( 1 );
 	}
 };
-
 ipcMain.on( `logs:load`, sendLogs );
+
+/** Add a new log item into DB */
+const addLog = async ( log ) =>
+{
+	try
+	{
+		await Log.create( log );
+		await sendLogs();
+	}
+	catch ( error )
+	{
+		console.error( error );
+	}
+};
+ipcMain.on( `logs:add`, ( _e, log ) => addLog( log ) );
+
+/** Delete a log item by the _id value */
+const deleteLog = async ( _id ) =>
+{
+	await Log.findOneAndDelete( { _id } );
+	await sendLogs();
+};
+ipcMain.on( `logs:delete`, ( _e, _id ) => deleteLog( _id ) );
 
 app.on( `window-all-closed`, () =>
 {
