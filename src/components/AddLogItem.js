@@ -40,7 +40,7 @@ const AddLogItem = ( { addLogItem } ) =>
 
 								<Col>
 
-									<Form.Control placeholder="Log" value={text} onChange={( e ) => setText( e.target.value )} required />
+									<Form.Control placeholder="Log or issue" value={text} onChange={( e ) => setText( e.target.value )} required />
 
 								</Col>
 
