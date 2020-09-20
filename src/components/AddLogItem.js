@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
-	Card, Form, Row, Col, Button,
+	Card, Form, Row, Col, Button, Accordion,
 } from 'react-bootstrap';
 
 const AddLogItem = ( { addLogItem } ) =>
@@ -20,57 +20,70 @@ const AddLogItem = ( { addLogItem } ) =>
 
 	return (
 
-		<Card className="mt-5 mb-3">
-			<Card.Body>
-				<Card.Title className="text-center">Add new Log</Card.Title>
-				<Form onSubmit={onSubmit}>
+		<Accordion>
+			<Card className="mt-5 mb-3">
 
-					<Row className="my-3">
+				<Card.Header className="text-right">
 
-						<Col>
+					<Accordion.Toggle as={Button} variant="button" eventKey="0" className="btn-success">
+                    +Add Log
+					</Accordion.Toggle>
 
-							<Form.Control placeholder="Log" value={text} onChange={( e ) => setText( e.target.value )} required />
+				</Card.Header>
 
-						</Col>
+				<Accordion.Collapse eventKey="0">
+					<Card.Body>
+						<Card.Title className="text-center">Add new Log</Card.Title>
+						<Form onSubmit={onSubmit}>
 
-					</Row>
+							<Row className="my-3">
 
-					<Row>
+								<Col>
 
-						<Col>
+									<Form.Control placeholder="Log" value={text} onChange={( e ) => setText( e.target.value )} required />
 
-							<Form.Control placeholder="User" value={user} onChange={( e ) => setUser( e.target.value )} required />
+								</Col>
 
-						</Col>
+							</Row>
 
-						<Col>
+							<Row>
 
-							<Form.Control as="select" value={priority} onChange={( e ) => setPriority( e.target.value )} required>
+								<Col>
 
-								<option value="0">Select Priority</option>
-								<option value="low">Low</option>
-								<option value="moderate">Moderate</option>
-								<option value="high">High</option>
+									<Form.Control placeholder="User" value={user} onChange={( e ) => setUser( e.target.value )} required />
 
-							</Form.Control>
+								</Col>
 
-						</Col>
+								<Col>
 
-					</Row>
+									<Form.Control as="select" value={priority} onChange={( e ) => setPriority( e.target.value )} required>
 
-					<Row className="my-3">
+										<option value="0">Select Priority</option>
+										<option value="low">Low</option>
+										<option value="moderate">Moderate</option>
+										<option value="high">High</option>
 
-						<Col>
+									</Form.Control>
 
-							<Button type="submit" variant="secondary" block>Add Log</Button>
+								</Col>
 
-						</Col>
+							</Row>
 
-					</Row>
+							<Row className="my-3">
 
-				</Form>
-			</Card.Body>
-		</Card>
+								<Col>
+
+									<Button type="submit" variant="secondary" block>Add</Button>
+
+								</Col>
+
+							</Row>
+
+						</Form>
+					</Card.Body>
+				</Accordion.Collapse>
+			</Card>
+		</Accordion>
 
 	);
 };
