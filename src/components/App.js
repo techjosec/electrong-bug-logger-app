@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Container, Table, Alert } from 'react-bootstrap';
 import LogItem from './LogItem';
 import AddLogItem from './AddLogItem';
 
 const actualDate = new Date();
-const initialLogs = [
+const initialLogsState = [
 	{
 		_id: 1, text: `This is long one`, priority: `low`, user: `Mabel`, created: actualDate,
 	},
@@ -19,9 +19,30 @@ const initialLogs = [
 	},
 ];
 
+const initialAlertState = {
+	show    : false,
+	variant : `success`,
+	message : ``,
+};
+
 const App = () =>
 {
-	const [logs, setLogs] = useState( initialLogs );
+	const [logs, setLogs] = useState( initialLogsState );
+	const [alert, setAlert] = useState( initialAlertState );
+
+	const showAlert = ( message, variant = `success`, seconds = 3 ) =>
+	{
+		setAlert( {
+			show: true,
+			variant,
+			message,
+		} );
+
+		setTimeout( () =>
+		{
+			setAlert( initialAlertState );
+		}, seconds * 1000 );
+	};
 
 	const addLogItem = ( item ) =>
 	{
@@ -31,12 +52,16 @@ const App = () =>
 			created : new Date(),
 		};
 		setLogs( [...logs, newItem] );
+
+		showAlert( `Log added` );
 	};
 
 	return (
 
 		<Container>
+			<h1 className="text-center">Buglogger App</h1>
 			<AddLogItem addLogItem={addLogItem} />
+			{ alert.show && <Alert variant={alert.variant}>{alert.message}</Alert> }
 			<Table>
 
 				<thead>
