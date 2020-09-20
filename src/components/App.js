@@ -78,6 +78,16 @@ const App = () =>
 		showAlert( `Log added` );
 	};
 
+	const noLogsAddedYetMessage = () => (
+		<tr>
+			<td className="text-center" colSpan="5">
+
+				<Alert variant="info"><b>No logs added yet</b></Alert>
+
+			</td>
+		</tr>
+	);
+
 	return (
 
 		<Container>
@@ -101,9 +111,11 @@ const App = () =>
 				<tbody>
 
 					{
-						logs.map( ( log ) => (
-							<LogItem key={log._id} deleteLogItem={deleteLogItem} log={log} />
-						) )
+						logs.length === 0
+							? noLogsAddedYetMessage()
+							: logs.map( ( log ) => (
+								<LogItem key={log._id} deleteLogItem={deleteLogItem} log={log} />
+							) )
 					}
 
 				</tbody>
