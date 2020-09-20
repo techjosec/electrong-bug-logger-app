@@ -1,26 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ipcRenderer } from 'electron';
 import { Container, Table, Alert } from 'react-bootstrap';
 import swal from 'sweetalert';
 
 import LogItem from './LogItem';
 import AddLogItem from './AddLogItem';
 
-const actualDate = new Date();
-const initialLogsState = [
-	{
-		_id: 1, text: `This is long one`, priority: `low`, user: `Mabel`, created: actualDate,
-	},
-	{
-		_id: 2, text: `This is long two`, priority: `moderate`, user: `Ariel`, created: actualDate,
-	},
-	{
-		_id: 3, text: `This is long three`, priority: `high`, user: `Jodias`, created: actualDate,
-	},
-	{
-		_id: 4, text: `This is long four`, priority: `moderate`, user: `Lalour`, created: actualDate,
-	},
-];
-
+const initialLogsState = [];
 const initialAlertState = {
 	show    : false,
 	variant : `success`,
@@ -31,6 +17,16 @@ const App = () =>
 {
 	const [logs, setLogs] = useState( initialLogsState );
 	const [alert, setAlert] = useState( initialAlertState );
+
+	useEffect( () =>
+	{
+		ipcRenderer.send( `logs:load` );
+
+		ipcRenderer.on( `logs:get`, ( _e, _logs ) =>
+		{
+			setLogs( JSON.parse( _logs ) );
+		} );
+	}, [] );
 
 	const showAlert = ( message, variant = `success`, seconds = 3 ) =>
 	{

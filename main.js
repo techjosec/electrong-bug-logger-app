@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 const path = require( `path` );
 const url = require( `url` );
-const { app, BrowserWindow } = require( `electron` );
+const { app, BrowserWindow, ipcMain } = require( `electron` );
 const Log = require( `./models/Log` );
 const connectDB = require( `./config/db` );
 connectDB();
@@ -78,6 +79,22 @@ function createMainWindow()
 }
 
 app.on( `ready`, createMainWindow );
+
+const sendLogs = async () =>
+{
+	try
+	{
+		const logs = await Log.find( {} ).sort( { created: 1 } );
+		mainWindow.webContents.send( `logs:get`, JSON.stringify( logs ) );
+	}
+	catch ( err )
+	{
+		console.error( err );
+		process.exit( 1 );
+	}
+};
+
+ipcMain.on( `logs:load`, sendLogs );
 
 app.on( `window-all-closed`, () =>
 {
