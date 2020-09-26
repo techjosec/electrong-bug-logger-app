@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ipcRenderer } from 'electron';
-import { Container, Table, Alert } from 'react-bootstrap';
+import {
+	Container, Table, Alert, Row, Col, Image,
+} from 'react-bootstrap';
 import swal from 'sweetalert';
+import logo from '../../assets/icon.png';
 
 import LogItem from './LogItem';
 import AddLogItem from './AddLogItem';
@@ -90,7 +93,7 @@ const App = () =>
 
 	return (
 
-		<Container>
+		<Container className="mt-3">
 			<h1 className="text-center">Buglogger App</h1>
 			<AddLogItem addLogItem={addLogItem} />
 			{ alert.show && <Alert variant={alert.variant}>{alert.message}</Alert> }
@@ -122,6 +125,11 @@ const App = () =>
 
 			</Table>
 
+			<Row className="fixed-bottom">
+				<Col className="text-right mr-2 mb-2">
+					<Image src={logo} alt="logo" width="56" title="Hey! I'm the bug here!" />
+				</Col>
+			</Row>
 		</Container>
 
 	);
