@@ -10,6 +10,12 @@ const AddLogItem = ( { addLogItem } ) =>
 	const [text, setText] = useState( `` );
 	const [user, setUser] = useState( `` );
 	const [priority, setPriority] = useState( `` );
+	const [accordionState, setAccordionState] = useState( true );
+
+	const onChangeAccordionState = ( newState ) =>
+	{
+		setAccordionState( newState );
+	};
 
 	const onSubmit = ( e ) =>
 	{
@@ -28,8 +34,14 @@ const AddLogItem = ( { addLogItem } ) =>
 
 				<Card.Header className="text-right">
 
-					<Accordion.Toggle as={Button} variant="button" eventKey="0" className="btn-success">
-                    +Add Log
+					<Accordion.Toggle
+						as={Button}
+						variant="button"
+						eventKey="0"
+						className={accordionState ? `btn-success` : `btn-primary`}
+						onClick={() => onChangeAccordionState( !accordionState )}
+					>
+						{ ( accordionState ? `+ Add Log` : `Close` ) }
 					</Accordion.Toggle>
 
 				</Card.Header>
