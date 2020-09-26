@@ -16,6 +16,9 @@ const AddLogItem = ( { addLogItem } ) =>
 		e.preventDefault();
 
 		addLogItem( { text, user, priority } );
+		setText( `` );
+		setUser( `` );
+		setPriority( `` );
 	};
 
 	return (
@@ -40,7 +43,7 @@ const AddLogItem = ( { addLogItem } ) =>
 
 								<Col>
 
-									<Form.Control placeholder="Log or issue" value={text} onChange={( e ) => setText( e.target.value )} required />
+									<Form.Control name="log" placeholder="Log or issue" value={text} onChange={( e ) => setText( e.target.value )} required />
 
 								</Col>
 
@@ -50,15 +53,15 @@ const AddLogItem = ( { addLogItem } ) =>
 
 								<Col>
 
-									<Form.Control placeholder="User" value={user} onChange={( e ) => setUser( e.target.value )} required />
+									<Form.Control name="user" placeholder="User" value={user} onChange={( e ) => setUser( e.target.value )} required />
 
 								</Col>
 
 								<Col>
 
-									<Form.Control as="select" value={priority} onChange={( e ) => setPriority( e.target.value )} required>
+									<Form.Control name="priority" as="select" value={priority} onChange={( e ) => setPriority( e.target.value )} required>
 
-										<option value="0">Select Priority</option>
+										<option value="">Select Priority</option>
 										<option value="low">Low</option>
 										<option value="moderate">Moderate</option>
 										<option value="high">High</option>
