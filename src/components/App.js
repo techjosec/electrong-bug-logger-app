@@ -18,16 +18,6 @@ const App = () =>
 	const [logs, setLogs] = useState( initialLogsState );
 	const [alert, setAlert] = useState( initialAlertState );
 
-	useEffect( () =>
-	{
-		ipcRenderer.send( `logs:load` );
-
-		ipcRenderer.on( `logs:get`, ( _e, _logs ) =>
-		{
-			setLogs( JSON.parse( _logs ) );
-		} );
-	}, [] );
-
 	const showAlert = ( message, variant = `success`, seconds = 3 ) =>
 	{
 		setAlert( {
@@ -81,6 +71,22 @@ const App = () =>
 			</td>
 		</tr>
 	);
+
+	useEffect( () =>
+	{
+		ipcRenderer.send( `logs:load` );
+
+		ipcRenderer.on( `logs:get`, ( _e, _logs ) =>
+		{
+			setLogs( JSON.parse( _logs ) );
+		} );
+
+		ipcRenderer.on( `logs:clear`, () =>
+		{
+			setLogs( [] );
+			showAlert( `Logs cleared` );
+		} );
+	}, [] );
 
 	return (
 
